@@ -24,33 +24,33 @@ public class SummarizationCollectors {
     // Сумма рейтинга всех фильмов их списка
     private static double sum(List<Movie> list) {
         return list.stream()
-                .collect(Collectors.summingDouble(Movie::rating));
+                .collect(Collectors.summingDouble(Movie::getRating));
     }
 
     // Средняя рейтинга всех фильмов их списка
     private static double average(List<Movie> list) {
         return list.stream()
-                .collect(Collectors.averagingDouble(Movie::rating));
+                .collect(Collectors.averagingDouble(Movie::getRating));
     }
 
     // Максимальный рейтинг
     private static Movie max(List<Movie> list) {
         return list.stream()
-                .collect(Collectors.maxBy(Comparator.comparing(Movie::rating)))
+                .collect(Collectors.maxBy(Comparator.comparing(Movie::getRating)))
                 .orElseThrow();
     }
 
     // Минимальный рейтинг
     private static Movie min(List<Movie> list) {
         return list.stream()
-                .collect(Collectors.minBy(Comparator.comparing(Movie::rating)))
+                .collect(Collectors.minBy(Comparator.comparing(Movie::getRating)))
                 .orElseThrow();
     }
 
     // Посчитать сколько фильмов имеют рейтинг больше 7.5 -> 6
     private static long count(List<Movie> list) {
         return list.stream()
-                .map(Movie::rating)
+                .map(Movie::getRating)
                 .filter(rating -> rating > 7.5)
                 .collect(Collectors.counting());
     }
@@ -58,6 +58,6 @@ public class SummarizationCollectors {
     // Sum, average, count, min, max одной операцией
     private static DoubleSummaryStatistics allData(List<Movie> list) {
         return list.stream()
-                .collect(Collectors.summarizingDouble(Movie::rating));
+                .collect(Collectors.summarizingDouble(Movie::getRating));
     }
 }

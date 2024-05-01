@@ -1,10 +1,8 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Main {
+public class CollectElements {
     public static void main(String[] args) {
         List<Movie> list = Arrays.asList(
                 new Movie("Аватар", 9.5), new Movie("Гарри Поттер", 10),
@@ -14,7 +12,7 @@ public class Main {
 
         // toList, Collectors.toList(), Collectors.toCollection()
         List<Movie> movieList = list.stream()
-                .filter(movie -> movie.rating() > 8.0)
+                .filter(movie -> movie.getRating() > 8.0)
                 .collect(Collectors.toCollection(ArrayList::new));
         movieList.forEach(System.out::println);
 
@@ -22,16 +20,16 @@ public class Main {
 
         // toSet, Collectors.toCollection()
         Set<Movie> movieSet = list.stream()
-                .filter(movie -> movie.rating() > 8.0).collect(Collectors.toSet());
+                .filter(movie -> movie.getRating() > 8.0).collect(Collectors.toSet());
         movieSet.forEach(System.out::println);
 
         System.out.println("---------------------------------------");
 
         // Collectors.toMap()
         Map<String, Double> movieMap = list.stream()
-                .filter(movie -> movie.rating() > 8.0)
+                .filter(movie -> movie.getRating() > 8.0)
                 .distinct()
-                .collect(Collectors.toMap(Movie::name, Movie::rating));
+                .collect(Collectors.toMap(Movie::getName, Movie::getRating));
         movieMap.forEach((k, v) -> System.out.println(k + " " + v));
 
         System.out.println("---------------------------------------");

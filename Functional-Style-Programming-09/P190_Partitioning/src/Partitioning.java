@@ -24,23 +24,23 @@ public class Partitioning {
     // которые не прошли фильтр
     private static Map<Boolean, List<Movie>> partitionByRating(List<Movie> list) {
         return list.stream()
-                .collect(Collectors.partitioningBy(movie -> movie.rating() > 8));
+                   .collect(Collectors.partitioningBy(movie -> movie.getRating() > 8));
     }
 
     private static Map<Boolean, List<Movie>> partitionByGenre(List<Movie> list) {
         return list.stream()
-                .collect(Collectors.partitioningBy(movie -> movie.genre().equals("Фэнтези")));
+                   .collect(Collectors.partitioningBy(movie -> movie.getGenre().equals("Фэнтези")));
     }
 
     private static Map<Boolean, Set<Movie>> partitionByGenreToSet(List<Movie> list) {
         return list.stream()
-                .collect(Collectors.partitioningBy(movie -> !movie.name().isEmpty(), Collectors.toSet()));
+                   .collect(Collectors.partitioningBy(movie -> !movie.getName().isEmpty(), Collectors.toSet()));
     }
 
     private static Map<Boolean, Movie> partitionByRatingMax(List<Movie> list) {
         return list.stream()
-                .collect(Collectors.partitioningBy(movie -> movie.rating() > 8,
-                        Collectors.collectingAndThen(
-                                Collectors.maxBy(Comparator.comparingDouble(Movie::rating)), Optional::get)));
+                   .collect(Collectors.partitioningBy(movie -> movie.getRating() > 8,
+                           Collectors.collectingAndThen(
+                                   Collectors.maxBy(Comparator.comparingDouble(Movie::getRating)), Optional::get)));
     }
 }
